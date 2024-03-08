@@ -1,25 +1,69 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
-import InputComponent from './components/inputComponent'
-
+import { Card } from "./modules/card"
+import { CardRender } from "./modules/cardRender"
+let BoBai = new Card()
 function App() {
+  const [renderCard, setRenderCard] = useState([])
+
+
+  function xeBaiMoi() {
+    BoBai = new Card()
+  }
+  function tronBai() {
+    BoBai.tronBai()
+    //setRenderCard(BoBai.getBaiXep())
+  }
+  function xaoBai() {
+    BoBai.xaoBai()
+    //setRenderCard(BoBai.getBaiXep())
+  }
+  function kiemBai() {
+    BoBai.kiemBai()
+
+  }
+
+  function xoa() {
+    setRenderCard([])
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <InputComponent />
+      <div>
+        <button onClick={() => console.log(renderCard)}>
+          check
+        </button>
+        <button onClick={xeBaiMoi}>
+          Bo bai moi
+        </button>
+        <button onClick={tronBai}>
+          Tron bai
+        </button>
+        <button onClick={xaoBai}>
+          Xao bai
+        </button>
+        <button onClick={kiemBai}>
+          kiem bai
+        </button>
+
+        <button onClick={xoa}>
+          Xoa
+        </button>
+      </div>
+      <div style={{
+        display: "flex",
+        flexWrap: "wrap"
+      }}>
+        {renderCard.length <= 0 ? "" : renderCard.map(theBai => {
+          return (
+            <div key={`${theBai.chatBai} ${theBai.laBai}`} style={{
+              width: "fit-content"
+            }}>
+              <CardRender laBai={{ so: theBai.laBai, chat: theBai.chatBai }} />
+            </div>
+          )
+        })}
+      </div>
     </div>
   );
 }

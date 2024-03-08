@@ -10,8 +10,6 @@ class Card {
         while (vt !== 52) {
             let laBai = ramdomnize(13)
             let chatBai = ramdomnize(4)
-            console.log(laBai, chatBai)
-            console.log(vt)
             if (this.#boBai[chatBai][laBai] === 0) {
                 this.#boBai[chatBai][laBai] = 1
                 vt = vt + 1
@@ -35,11 +33,14 @@ class Card {
             this.#baiXep[mem] = this.#baiXep[i]
             mem--
         }
-        console.log(pos1, pos2)
         for (let i = 0; i <= pos1 - pos2; i++) {
             this.#baiXep[i] = arr[i]
         }
     }
+    getBaiXep() {
+        return this.#baiXep
+    }
+
 }
 function ramdomnize(max) {
     return Math.floor(Math.random() * max);
